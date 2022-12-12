@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+export FADMEN_HOME=$PWD
+
+CONFIG=$1
+NAMEE=${CONFIG::-5}
+NAME=${NAMEE:8}
+
+#scripts/build.sh &&
+./build/bin/main Planning $FADMEN_HOME/$CONFIG $FADMEN_HOME/results/$NAME
+

@@ -1,0 +1,52 @@
+General:
+  domain: "GridTraffic"
+  horizon: 50
+  discountFactor: 0.95
+  IDOfAgentToControl: "5"
+
+Experiment:
+  repeat: 1
+  saveReplay: False
+  fullLogging: False
+
+AgentComponent: # the agent that we can control
+  "1":
+    Type: Pattern
+    freq: 9
+  "2":
+    Type: Pattern
+    freq: 9
+  "3":
+    Type: Pattern
+    freq: 9
+  "4":
+    Type: Pattern
+    freq: 9
+  "5":
+    Type: POMCP
+    Rollout:
+      explorationConstant: 10.0
+      numberOfParticles: 1000
+      numberOfSecondsPerStep: 0.0625
+      discountHorizon: 0.16
+      particleReinvigoration: False
+      particleReinvigorationRate: 0.0
+      reuseSimulationsToFilterParticle: True
+    Simulator:
+      Type: "Global"
+  "6":
+    Type: Pattern
+    freq: 9
+  "7":
+    Type: Pattern
+    freq: 9
+  "8":
+    Type: Pattern
+    freq: 9
+  "9":
+    Type: Pattern
+    freq: 9
+
+GridTraffic:
+  obsLength: 1
+  2SDBNYamlFilePath: configs/2SDBNYamlFiles/GTC.yaml

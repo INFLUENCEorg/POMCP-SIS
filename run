@@ -1,0 +1,2 @@
+#!/bin/bash
+singularity exec --bind $(pwd -P) singularity/FADMEN.sif $@

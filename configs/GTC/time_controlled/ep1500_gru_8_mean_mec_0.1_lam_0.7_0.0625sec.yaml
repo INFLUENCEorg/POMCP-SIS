@@ -1,0 +1,73 @@
+General:
+  domain: "GridTraffic"
+  horizon: 50
+  discountFactor: 0.95
+  IDOfAgentToControl: "5"
+
+Experiment:
+  repeat: 1500
+  saveReplay: False
+  fullLogging: False
+
+AgentComponent: # the agent that we can control
+  "1":
+    Type: Pattern
+    freq: 9
+  "2":
+    Type: Pattern
+    freq: 9
+  "3":
+    Type: Pattern
+    freq: 9
+  "4":
+    Type: Pattern
+    freq: 9
+  "5":
+    Type: MixedPOMCP
+    Rollout:
+      explorationConstant: 10.0
+      numberOfParticles: 1000
+      numberOfSecondsPerStep: 0.0625
+      discountHorizon: 0.16
+      particleReinvigoration: False
+      particleReinvigorationRate: 0.0
+      reuseSimulationsToFilterParticle: True
+    Simulator:
+      InfluencePredictor:
+        Type: GRU
+        numberOfHiddenStates: 8
+        Training:
+          batchSize: 128
+          learningRate: 0.00025
+          trainFreq: 64
+          weightDecay: 0.0
+          lossType: mean
+      Type: SelfImproving
+      ReplayBuffer:
+        upperBoundOnTheNumberOfSimulationsPerStep: 15
+    Meta:
+      metaExplorationConstant: 0.1
+      metaExplorationBonus: BOTH
+      lambda: 0.7
+      computationCostByHorizon: false
+      entropyEstimation: true
+      entropyEstimationType: "EXACT"
+      actionSelection: "combined"
+      computeRolloutLoss: True
+      storeRolloutData: True
+  "6":
+    Type: Pattern
+    freq: 9
+  "7":
+    Type: Pattern
+    freq: 9
+  "8":
+    Type: Pattern
+    freq: 9
+  "9":
+    Type: Pattern
+    freq: 9
+
+GridTraffic:
+  obsLength: 1
+  2SDBNYamlFilePath: configs/2SDBNYamlFiles/GTC.yaml
